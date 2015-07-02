@@ -3,11 +3,11 @@
 
 /* Helpers */
 
-$primary: #064E86;
-$white: #fafafa;
+$primary: #CC3F0C;
+$white: #E2DCDE;
 $menu: #B9C0DA;
-$footer: #373F51;
-$links: #7DBC9E;
+$footer: #424B54;
+$links: #B0C1B2;
 
 @font-face{
   font-family: 'Gotham';
@@ -75,11 +75,11 @@ body, html {
 }
 
 ::selection {
-  background: $links; /* WebKit/Blink Browsers */
+  background: #C1DBE3; /* WebKit/Blink Browsers */
   color: $white;
 }
 ::-moz-selection {
-  background: $links; /* Gecko Browsers */
+  background: #C1DBE3; /* Gecko Browsers */
   color: $white;
 }
 
@@ -101,7 +101,7 @@ h2{ font-size: 18pt; }
 h3{ font-size: 14pt; }
 h4{ font-size: 12pt; }
 
-a{ color: $links; }
+a{ color: $primary; }
 a:hover{ color: #3D93AC }
 
 #content{
@@ -112,7 +112,7 @@ a:hover{ color: #3D93AC }
 
 header{
   font-family: 'Gotham';
-  @include gradient($primary, #034375);
+  @include gradient($primary, #B5350D);
   height: 100px;
 }
 
@@ -129,7 +129,7 @@ nav#headerNav{
     text-decoration: none;
   }
   a:hover, a:focus{
-    color: #ccc;
+    color: #C1DBE3;
   }
   i{
     font-size: 14pt;
@@ -236,7 +236,7 @@ footer{
         text-decoration: none;
       }
       a:hover{
-        color: #fff;
+        color: $white;
       }
     }
     ul li:last-child{
