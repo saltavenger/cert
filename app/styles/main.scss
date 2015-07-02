@@ -3,11 +3,11 @@
 
 /* Helpers */
 
-$red: #DA291C;
-$white: #fff;
-$blueGrey: #B5C9D3;
-$grey: #D0D3D4;
-$blue: #48A9C5;
+$primary: #064E86;
+$white: #fafafa;
+$menu: #B9C0DA;
+$footer: #373F51;
+$links: #7DBC9E;
 
 @font-face{
   font-family: 'Gotham';
@@ -71,14 +71,15 @@ body, html {
   color: #333;
   margin: 0px;
   padding: 0px;
+  background: $white;
 }
 
 ::selection {
-  background: $blue; /* WebKit/Blink Browsers */
+  background: $links; /* WebKit/Blink Browsers */
   color: $white;
 }
 ::-moz-selection {
-  background: $blue; /* Gecko Browsers */
+  background: $links; /* Gecko Browsers */
   color: $white;
 }
 
@@ -100,7 +101,7 @@ h2{ font-size: 18pt; }
 h3{ font-size: 14pt; }
 h4{ font-size: 12pt; }
 
-a{ color: $blue; }
+a{ color: $links; }
 a:hover{ color: #3D93AC }
 
 #content{
@@ -111,7 +112,7 @@ a:hover{ color: #3D93AC }
 
 header{
   font-family: 'Gotham';
-  @include gradient($red, #B81104);
+  @include gradient($primary, #034375);
   height: 100px;
 }
 
@@ -128,7 +129,7 @@ nav#headerNav{
     text-decoration: none;
   }
   a:hover, a:focus{
-    color: $grey;
+    color: #ccc;
   }
   i{
     font-size: 14pt;
@@ -155,7 +156,7 @@ nav#headerNav{
   }
   .dropdown ul.submenu-1:before{
     border: solid;
-    border-color: $blueGrey transparent;
+    border-color: $menu transparent;
     border-width: 0px 8px 8px 8px;
     top: 2px;
     content: "";
@@ -176,7 +177,7 @@ nav#headerNav{
     }
     li{
       padding: 2px 10px 2px 10px;
-      background: $blueGrey;
+      background: $menu;
     }
     li:first-child{
       padding-top: 8px;
@@ -204,7 +205,8 @@ nav#headerNav{
 }
 
 footer{
-  @include gradient(#AAABAB, $grey);
+  color: $white;
+  @include gradient(#333B49, $footer);
   padding: 20px;
   #logoContainer{
     @extend .fleft;
@@ -225,16 +227,16 @@ footer{
     ul li{
       display: inline-block;
       list-style-type: none;
-      border-right: 1px solid $red;
+      border-right: 1px solid $links;
       padding-right: 5px;
       a{
         font-family: "Gotham";
-        color: $red;
+        color: $links;
         font-weight: bold;
         text-decoration: none;
       }
       a:hover{
-        color: #000;
+        color: #fff;
       }
     }
     ul li:last-child{
