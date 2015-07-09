@@ -11,7 +11,7 @@ $blue: #48A9C5;
 
 @font-face{
   font-family: 'Gotham';
-  src: url('../fonts/Gotham-Book.otf');
+  src: url('fonts/Gotham-Book.otf');
 }
 
 @mixin gradient($color1, $color2){
