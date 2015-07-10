@@ -1,6 +1,36 @@
 {
 	"docketData": [
-		{"metric": "Total Dockets", "value": 1100},
-		{"metric": "Dockets in Cert", "value": 276}
+		{"metric": "Comments in Docket", "value": 1100},
+		{"metric": "Comments in CommentCounts", "value": 276}
+	],
+	"commentData": [
+		{"metric": "Comment Excerpts", "value": 3515},
+		{"metric": "Responses", "value": 5}
+	],
+	"responseData": [
+		{"metric": "Draft Responses", "value": 0 },
+		{"metric": "Final Responses", "value": 1 }
+	],
+	"orgNumData": [
+		{"value": 276 }
+	],
+	"orgTypeData":[
+		{"orgtype":"Academic","count":19},
+		{"orgtype":"Agricultural Industry/Association","count":41},
+		{"orgtype":"Citizen","count":30},
+		{"orgtype":"Commodity Organizations/Association","count":28},
+		{"orgtype":"Crop Advisors","count":9},
+		{"orgtype":"Farmworker Organizations/Labor Unions/Associations","count":38},
+		{"orgtype":"State/Tribal/Local Agencies","count":34},
+		{"orgtype":"Growers/Handlers/Workers","count":7},
+		{"orgtype":"Health Organizations","count":14},
+		{"orgtype":"Industry/Other","count":1},
+		{"orgtype":"Other","count":14},
+		{"orgtype":"Pesticide Manufacturers/Distributors","count":5},
+		{"orgtype":"Public Interest/Advocacy Groups","count":33},
+		{"orgtype":"Federal","count":3}
+	],
+	"headData": [
+	{"outline_number":"20.3.","outline_description":"Salutations and Greetings from Letters","number_in_outline":205},{"outline_number":"3.1.","outline_description":"Shortening Retraining Interval for Workers and Handlers","number_in_outline":162},{"outline_number":"14.","outline_description":"Minimum age for early entry workers and handlers","number_in_outline":158},{"outline_number":"5.3.","outline_description":"Pesticide Application Information – Location and Accessibility","number_in_outline":150},{"outline_number":"3.5.","outline_description":"Expand the Content of Worker and Handler Pesticide Safety Training","number_in_outline":140}
 	]
 }
