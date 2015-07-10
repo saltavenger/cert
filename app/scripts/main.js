@@ -6,29 +6,34 @@ $('.dropdown a').on('mouseenter focus', function(){
 	$(this).closest('.dropdown').removeClass('active');
 });
 
-$("#docketCount").kendoChart({
-	title: {
-		text: "How many dockets?"
-	},
-	legend: {
-		visible: false
-	},
-	seriesDefaults: {
-		type: "bar"
-	},
-	tooltip: {
-		visible: true
-	},
-	dataSource: {
-		transport: {
-			read: {
-				url: "https://cert-abtassociates.com/agworkerprotection_devel/json/json2.cfm",
-				dataType: "html",
-				data: $("#main").text(),
-				success: function(data){
-					return data;
-				}
-			}
-		}
-	}
+var docketData = new kendo.data.DataSource({
+  transport: {
+    read: {
+      url: "scripts/certData",
+      contentType: "application/json",
+      dataType: "json"
+    }
+  },
+    schema: {
+    	data: "docketData"
+    }
 });
+
+$("#docketCount").kendoChart({
+  autoBind: false,
+  dataSource: docketData,
+  series: [{
+  	field: "value",
+  	color: function(point){
+  		var seriesColor = ["#e41a1c", "#377eb8"];
+  		return seriesColor[point.index];
+  	}
+  }],
+  categoryAxis:{
+  	field: "metric"
+  },
+  tooltip: {
+  	visible: true
+  }
+});
+docketData.read()
