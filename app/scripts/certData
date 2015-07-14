@@ -1,4 +1,4 @@
-{
+[{
 	"docketData": [
 		{"metric": "Comments in Docket", "value": 1100},
 		{"metric": "Comments in CommentCounts", "value": 276}
@@ -36,5 +36,53 @@
 		{"outline_number": "14.", "outline_description": "Minimum age for early entry workers and handlers", "number_in_outline": 158},
 		{"outline_number": "5.3.", "outline_description": "Pesticide Application Information – Location and Accessibility", "number_in_outline": 150},
 		{"outline_number": "3.5.", "outline_description": "Expand the Content of Worker and Handler Pesticide Safety Training", "number_in_outline": 140}
+	],
+	"stateData": [
+		{"state":"AK","count":1},
+		{"state":"AL","count":1},
+		{"state":"AR","count":1},
+		{"state":"AZ","count":3},
+		{"state":"CA","count":12},
+		{"state":"CO","count":2},
+		{"state":"CT","count":1},
+		{"state":"DC","count":4},
+		{"state":"FL","count":10},
+		{"state":"GA","count":3},
+		{"state":"HI","count":4},
+		{"state":"IA","count":2},
+		{"state":"ID","count":1},
+		{"state":"IL","count":2},
+		{"state":"IN","count":2},
+		{"state":"KS","count":2},
+		{"state":"LA","count":1},
+		{"state":"MA","count":1},
+		{"state":"MD","count":1},
+		{"state":"ME","count":1},
+		{"state":"MI","count":4},
+		{"state":"MN","count":1},
+		{"state":"MO","count":1},
+		{"state":"MS","count":1},
+		{"state":"NA","count":164},
+		{"state":"NC","count":7},
+		{"state":"ND","count":1},
+		{"state":"NH","count":1},
+		{"state":"NJ","count":3},
+		{"state":"NM","count":2},
+		{"state":"NY","count":1},
+		{"state":"OH","count":1},
+		{"state":"OK","count":1},
+		{"state":"OR","count":4},
+		{"state":"PA","count":2},
+		{"state":"RI","count":1},
+		{"state":"DE","count":1},
+		{"state":"SC","count":1},
+		{"state":"SD","count":1},
+		{"state":"TN","count":2},
+		{"state":"TX","count":4},
+		{"state":"UT","count":1},
+		{"state":"VA","count":3},
+		{"state":"WA","count":9},
+		{"state":"WI","count":3},
+		{"state":"WY","count":2}
 	]
-}
+}]
