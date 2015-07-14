@@ -200,7 +200,22 @@ nav#headerNav{
 
 #content{
   background: $white;
-  height: 700px;
+}
+
+.dashItem{
+  float: left;
+  width: 45%;
+  height: 250px;
+  padding: 15px;
+  margin: 15px;
+  border: 2px solid $blueGrey;
+  border-radius: 4px;
+}
+.dashBottom{
+  display: block;
+  clear: both;
+  width: 90%;
+  height: 400px;
 }
 
 footer{
