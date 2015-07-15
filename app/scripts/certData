@@ -8,8 +8,8 @@
 		{"metric": "Responses", "value": 5}
 	],
 	"responseData": [
-		{"metric": "Draft Responses", "value": 0 },
-		{"metric": "Final Responses", "value": 1 }
+		{"metric": "Draft Responses", "value": 2 },
+		{"metric": "Final Responses", "value": 5 }
 	],
 	"orgNumData": [
 		{"value": 276 }
@@ -31,11 +31,11 @@
 		{"orgtype": "Federal","count": 3}
 	],
 	"headerData": [
-		{"outline_number": "20.3.", "outline_description": "Salutations and Greetings from Letters", "number_in_outline": 205},
-		{"outline_number": "3.1.", "outline_description": "Shortening Retraining Interval for Workers and Handlers", "number_in_outline":162},
-		{"outline_number": "14.", "outline_description": "Minimum age for early entry workers and handlers", "number_in_outline": 158},
-		{"outline_number": "5.3.", "outline_description": "Pesticide Application Information – Location and Accessibility", "number_in_outline": 150},
-		{"outline_number": "3.5.", "outline_description": "Expand the Content of Worker and Handler Pesticide Safety Training", "number_in_outline": 140}
+		{"outline_number": "20.3. Salutations and Greetings from Letters", "outline_description": "Salutations and Greetings from Letters", "number_in_outline": 205},
+		{"outline_number": "3.1. Shortening Retraining Interval for Workers and Handlers", "outline_description": "Shortening Retraining Interval for Workers and Handlers", "number_in_outline":162},
+		{"outline_number": "14. Minimum age for early entry workers and handlers", "outline_description": "Minimum age for early entry workers and handlers", "number_in_outline": 158},
+		{"outline_number": "5.3.Pesticide Application Information – Location and Accessibility", "outline_description": "Pesticide Application Information – Location and Accessibility", "number_in_outline": 150},
+		{"outline_number": "3.5. Expand the Content of Worker and Handler Pesticide Safety Training", "outline_description": "Expand the Content of Worker and Handler Pesticide Safety Training", "number_in_outline": 140}
 	],
 	"stateData": [
 		{"state":"AK","count":1},
