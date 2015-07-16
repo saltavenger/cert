@@ -6,7 +6,7 @@
 $red: #DA291C;
 $white: #fff;
 $blueGrey: #B5C9D3;
-$grey: #D0D3D4;
+$grey: #424B54;
 $blue: #48A9C5;
 
 @font-face{
@@ -219,8 +219,9 @@ nav#headerNav{
 }
 
 footer{
-  @include gradient(#AAABAB, $grey);
+  @include gradient(#333B49, $grey);
   padding: 20px;
+  color: #fff;
   #logoContainer{
     @extend .fleft;
     font-family: "Gotham";
@@ -240,16 +241,16 @@ footer{
     ul li{
       display: inline-block;
       list-style-type: none;
-      border-right: 1px solid $red;
+      border-right: 1px solid #fff;
       padding-right: 5px;
       a{
         font-family: "Gotham";
-        color: $red;
+        color: #fff;
         font-weight: bold;
         text-decoration: none;
       }
       a:hover{
-        color: #000;
+        color: $red;
       }
     }
     ul li:last-child{
