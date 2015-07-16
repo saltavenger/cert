@@ -63,6 +63,7 @@
         kendoOptions.dataSource.group = { field: groupOrcatField};
         kendoOptions.series[0].name = '#: group.value #';
         kendoOptions.categoryAxis = { labels: { visible: false} };
+        kendoOptions.title.align = "left";
       }
       else{
         kendoOptions.categoryAxis = { field: groupOrcatField };
