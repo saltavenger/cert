@@ -4,15 +4,9 @@
 		{"metric": "Comments in CommentCounts", "value": 276}
 	],
 	"commentData": [
-		{"metric": "Comment Excerpts", "value": 3515},
-		{"metric": "Responses", "value": 105}
-	],
-	"responseData": [
-		{"metric": "Draft Responses", "value": 2 },
-		{"metric": "Final Responses", "value": 5 }
-	],
-	"orgNumData": [
-		{"value": 276 }
+		{"metric": "Comment Excerpts", "value": 3515, "group": "comments"},
+		{"metric": "Draft Responses", "value": 1605, "group": "responses"},
+		{"metric": "Final Responses", "value": 520, "group": "responses"}
 	],
 	"orgTypeData":[
 		{"orgtype": "Academic", "count": 19 },
@@ -28,7 +22,8 @@
 		{"orgtype": "Other", "count": 14},
 		{"orgtype": "Pesticide Manufacturers\/Distributors", "count": 5},
 		{"orgtype": "Public Interest\/Advocacy Groups", "count": 33},
-		{"orgtype": "Federal","count": 3}
+		{"orgtype": "Federal","count": 3},
+		{"orgtype": "All Comments", "summary": "total" }
 	],
 	"headerData": [
 		{"outline_number": "20.3. Salutations and Greetings from Letters", "outline_description": "Salutations and Greetings from Letters", "number_in_outline": 205},

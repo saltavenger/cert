@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <!-- endbower -->
     <!-- endbuild -->
+    <link rel="stylesheet" href="//da7xgjtj801h2.cloudfront.net/2015.2.624/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="//da7xgjtj801h2.cloudfront.net/2015.2.624/styles/kendo.material.min.css" />
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css" />
-    <link rel="//da7xgjtj801h2.cloudfront.net/2015.2.624/styles/kendo.common.min.css" />
     <!-- endbuild -->
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
@@ -35,7 +36,13 @@
             <li><a href="#">Home</a></li>
             <li class="dropdown"><a href="#">Admin</a>
               <ul class="submenu-1">
-                <li><a href="#">User Management</a></li>
+                <li class="dropdown"><a href="#">User Management</a>
+                  <ul class="submenu-2">
+                    <li><a href="#">Add User</a></li>
+                    <li><a href="#">Edit User</a></li>
+                    <li><a href="#">Edit Responder</a></li>
+                  </ul>
+                </li>
                 <li><a href="#">Outline Management</a></li>
                 <li><a href="#">Outlines</a></li>
                 <li><a href="#">Comment Management</a></li>
@@ -100,9 +107,7 @@
         <div id="dash2" class="dashItem"></div>
         <div id="dash3" class="dashItem"></div>
         <div id="dash4" class="dashItem"></div>
-        <div id="dash5" class="dashItem"></div>
-        <div id="dash6" class="dashItem"></div>
-        <div id="dash7" class="dashBottom"></div>
+        <div id="dash5" class="dashBottom"></div>
       </div>
     </div>
     <footer role="contentinfo" class="group">
@@ -132,6 +137,7 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+    <script src="//da7xgjtj801h2.cloudfront.net/2015.2.624/js/kendo.all.min.js"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -142,9 +148,8 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="//da7xgjtj801h2.cloudfront.net/2015.2.624/js/kendo.all.min.js"></script>
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

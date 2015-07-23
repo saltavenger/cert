@@ -40,14 +40,14 @@ $blue: #48A9C5;
 .submenuShow {
   height: auto;
   width: auto;
-  max-width: 250px;
   margin: auto;
   padding: 10px 0px 0px 0px;
   line-height: inherit;
   opacity: 1;
-  overflow: auto;
+  overflow: visible;
   pointer-events: auto;
   position: absolute;
+  min-width: 130px;
 }
 
 .fleft{
@@ -133,7 +133,7 @@ nav#headerNav{
   i{
     font-size: 14pt;
   }
-  .dropdown ul.submenu-1{
+  .dropdown ul.submenu-1, .dropdown ul.submenu-2{
     @extend .visuallyHidden;
   }
   #mainNav > ul, #secondaryNav > ul{
@@ -163,10 +163,10 @@ nav#headerNav{
     position: absolute;
     z-index: 99;
   }
-  .dropdown:hover ul.submenu-1, .dropdown:focus ul.submenu-1, .dropdown > a:focus + ul.submenu-1, .dropdown.active ul.submenu-1{
+  .dropdown:hover ul.submenu-1, .dropdown:focus ul.submenu-1, .dropdown > a:focus + ul.submenu-1, .dropdown.active ul.submenu-1, .dropdown ul li.dropdown:hover ul.submenu-2, .dropdown ul li.dropdown:focus ul.submenu-2, .dropdown ul li.dropdown > a:focus ul.submenu-2, .dropdown ul li.dropdown.active ul.submenu-2{
     @extend .submenuShow;
   }
-  .submenu-1{
+  .submenu-1, .submenu-2{
     a{
       font-size: 10pt;
       color: #000;
@@ -188,6 +188,10 @@ nav#headerNav{
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px; 
     }
+  }
+  .submenu-2{
+    left: 185px;
+    top: 0px;
   }
   #secondaryNav .submenu-1{
     right: 2px;
