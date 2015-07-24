@@ -14,6 +14,7 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="//da7xgjtj801h2.cloudfront.net/2015.2.624/styles/kendo.common-material.min.css" />
     <link rel="stylesheet" href="//da7xgjtj801h2.cloudfront.net/2015.2.624/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css" />
     <!-- endbuild -->
@@ -125,7 +126,7 @@
         <div id="dash2" class="dashItem"></div>
         <div id="dash3" class="dashItem"></div>
         <div id="dash4" class="dashItem"></div>
-        <div id="dash5" class="dashBottom"></div>
+        <div id="dash5" class="dashBottom"><div id="map"></div></div>
       </div>
     </div>
     <footer role="contentinfo" class="group">
@@ -156,6 +157,9 @@
     <!-- endbuild -->
 
     <script src="//da7xgjtj801h2.cloudfront.net/2015.2.624/js/kendo.all.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="scripts/us-states.js"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
