@@ -19,6 +19,9 @@
   "smarttabs": true,
   "jquery": true,
   "globals": {
-    "kendo": false
+    "kendo": false,
+    "L": false,
+    "d3": false,
+    "statesData": true
   }
 }

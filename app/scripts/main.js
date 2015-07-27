@@ -42,31 +42,9 @@
   });
   
 
-  $(window).on("resize", function() {
-    kendo.resize($(".dashItem"));
+  $(window).on('resize', function() {
+    kendo.resize($('.dashItem'));
   });
-
-  function resize() {
-      
-      // adjust things when the window size changes
-      var map = d3.select('#map'),
-        width = parseInt(map.style('width')),
-        height = 500;
-
-      // update projection
-      var projection = d3.geo.albersUsa()
-          .translate([width / 2, height / 2])
-          .scale(width);
-
-      // resize the map container
-      map.style('width', width + 'px').style('height', height + 'px');
-
-      // resize the map
-      map.select('.land').attr('d', d3.geo.path()
-    .projection);
-      map.selectAll('.state').attr('d', d3.geo.path()
-    .projection);
-  }
 
   var getData = new kendo.data.DataSource({
     transport: {
@@ -82,12 +60,12 @@
       chart2Colors = [chartColors[13], chartColors[8], chartColors[6]],
       dash1Options = {
         series: [{
-          field: "value",
-          categoryField: "metric",
-          type: "pie",
+          field: 'value',
+          categoryField: 'metric',
+          type: 'pie',
           labels: {
             visible: true,
-            template: "#var percent= percentage;# # percent= kendo.toString(percent, \"p0\"); # #= percent#",
+            template: '#var percent= percentage;# # percent= kendo.toString(percent, \"p0\"); # #= percent#',
           }
         }],
         legend: {
@@ -95,13 +73,13 @@
         },
         tooltip:{
           visible: true,
-          template: "#= category#: #= value#"
+          template: '#= category#: #= value#'
         }
       },
       dash2Options = {
         series: [{
-          field: "value",
-          categoryField: "group",
+          field: 'value',
+          categoryField: 'group',
           stack: true
         }],
         legend: {
@@ -109,15 +87,15 @@
         },
         tooltip:{
           visible: true,
-          template: "#= dataItem.metric#: #= value#"
+          template: '#= dataItem.metric#: #= value#'
         }
       },
       dash3Options = {
         series: [{
-          type: "horizontalWaterfall",
-          field: "count",
-          categoryField: "orgtype",
-          summaryField: "summary",
+          type: 'horizontalWaterfall',
+          field: 'count',
+          categoryField: 'orgtype',
+          summaryField: 'summary',
           color: function(point){
             return chartColors[point.index];
           }
@@ -129,13 +107,13 @@
         },
         tooltip:{
           visible: true,
-          template: "<b>#= dataItem.orgtype#</b><br/>#= value# organizations"
+          template: '<b>#= dataItem.orgtype#</b><br/>#= value# organizations'
         }
       },
       dash4Options ={
         series: [{
-          field: "number_in_outline",
-          categoryField: "outline_number",
+          field: 'number_in_outline',
+          categoryField: 'outline_number',
           stack: true
         }],
         legend: {
@@ -148,8 +126,8 @@
         },
         tooltip:{
           visible: true,
-          template: "<div style='text-align: left;'><b>Description:</b> #= dataItem.outline_description#<br/><b>Comments:</b> #= value#</span>",
-          align: "left"
+          template: '<div style=\'text-align: left;\'><b>Description:</b> #= dataItem.outline_description#<br/><b>Comments:</b> #= value#</span>',
+          align: 'left'
         }
       };
       
@@ -163,17 +141,19 @@
           mapData = joinData(statesData, certData),
           comments = [];
 
-      mapData.features.forEach(function(e, i, a){
+      mapData.features.forEach(function(e){
         comments.push(e.properties.count);
       });
 
-      var max = d3.max(comments),
-          min = d3.min(comments);
+      /*var max = d3.max(comments),
+          min = d3.min(comments);*/
 
       //uses d3 quantile scale to create color map
       var quantile = d3.scale.quantile().domain(comments).range(d3.range(4)),
-          map = L.map('map').setView([37.8, -96], 4);
+          map = L.map('map', {zoomControl: false}).setView([37.8, -96], 4),
+          zoomHome = L.Control.zoomHome();
 
+      zoomHome.addTo(map);
 
       L.tileLayer('https://{s}.tiles.mapbox.com/v4/aareskog.n05p31e9/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYWFyZXNrb2ciLCJhIjoiUE9xRko2VSJ9.JrYWM5Ru2ocTP5zafKmdKw', {
         maxZoom: 18,
@@ -183,27 +163,10 @@
         id: 'mapbox.light'
       }).addTo(map);
 
-      function joinData(obj1, obj2){
-        var newData = obj1;
-        for(var i=0; i < obj1.features.length; i++){
-          var stateName = obj1.features[i].properties.name,
-            dataFeatures = newData.features[i].properties;
-          obj2.forEach(function(el, index, arr){
-            if(stateName === el.state){
-              dataFeatures.count = el.count;
-            }
-          });
-          if(typeof dataFeatures.count === "undefined"){
-            dataFeatures.count = 0;
-          }
-        }
-        return newData;
-      }
-
       // control that shows state info on hover
       var info = L.control();
 
-      info.onAdd = function (map) {
+      info.onAdd = function(){
         this._div = L.DomUtil.create('div', 'info');
         this.update();
         return this._div;
@@ -278,12 +241,10 @@
 
       var legend = L.control({position: 'bottomright'});
 
-      legend.onAdd = function (map) {
-
+      legend.onAdd = function () {
         var div = L.DomUtil.create('div', 'info legend'),
           grades = quantile.range(),
-          labels = [],
-          from, to;
+          labels = [];
 
         for (var i = 0; i < grades.length; i++) {
           var inverted = quantile.invertExtent(grades[i]);
@@ -297,16 +258,35 @@
       };
 
       legend.addTo(map);
-
     }
   });
 
   getData.read();
 
+  function joinData(obj1, obj2){
+    var newData = obj1;
+    for(var i=0; i < obj1.features.length; i++){
+      var stateName = obj1.features[i].properties.name,
+        dataFeatures = newData.features[i].properties,
+        properties = {'stateName': stateName, 'dataFeatures': dataFeatures};
+      obj2.forEach(checkState, properties);
+      if(typeof dataFeatures.count === 'undefined'){
+        dataFeatures.count = 0;
+      }
+    }
+    return newData;
+  }
+
+  function checkState(el){
+    // jshint validthis: true
+    if(this.stateName === el.state){
+      this.dataFeatures.count = el.count;
+    }
+  }
 
   function buildChart(id, data, dataSchema, chartOptions, chartColors, title, groupField){
     var baseOptions = {
-      theme: "material",
+      theme: 'material',
       dataSource: {
         data: data,
         schema: {
