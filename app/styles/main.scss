@@ -99,8 +99,12 @@ h2{ font-size: 18pt; }
 h3{ font-size: 14pt; }
 h4{ font-size: 12pt; }
 
-a{ color: $blue; }
-a:hover{ color: #3D93AC }
+a{ 
+  color: $blue;
+  &:hover{ 
+    color: #3D93AC;
+  }
+}
 
 #content{
   margin-left: 50px;
@@ -115,118 +119,130 @@ header{
 }
 
 nav#headerNav{
+  a{
+    color: $white;
+    font-weight: normal;
+    text-decoration: none;
+    &:hover, &:focus{
+      color: $grey;
+    }
+  }
+  i{
+    font-size: 14pt;
+  }
+  #mainNav > ul, #secondaryNav > ul{
+    margin: 65px 0px 0px 0px;
+    li{
+      list-style-type: none;
+    }
+    > li{
+      display: inline-block;
+      margin-right: 0px;
+      padding-right: 8px;
+      padding-left: 3px;
+      border-right: 1px solid $white;
+      &:last-child{
+        border-right: none;
+      }
+    }
+    li.dropdown{
+      &:hover ul .submenu-1, &:focus ul .submenu-1,
+      > a:hover + ul.submenu-1, > a:focus + ul.submenu-1,
+      &.active ul.submenu-1
+      {
+        @extend .submenuShow;
+      }
+      ul.submenu-1, ul.submenu-2{
+        a{
+          font-size: 10pt;
+          color: #000;
+          &:hover, &:focus{
+            color: $white;
+          }
+        }        
+        li{
+          position: relative;
+          padding: 2px 10px 2px 10px;
+          background: $blueGrey;
+          &:first-child{
+            padding-top: 8px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+          }
+          &:last-child{
+            padding-bottom: 8px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+          }
+        }
+      }
+      ul.submenu-1{
+        @extend .visuallyHidden;
+        li.dropdown{
+          > a:after{
+            content: "\f054";
+            font-family: "FontAwesome";
+            float: right;
+            margin: .4em 0px 0px 8px;
+            font-size: 9pt;
+          }
+          ul.submenu-2{
+            @extend .visuallyHidden;
+            left: 193px;
+            top: -10px;
+            position: absolute;
+          }
+          &:hover ul.submenu-2, &:focus ul.submenu-2,
+          > a:hover + ul.submenu-2, > a:focus + ul.submenu-2,
+          &.active ul.submenu-2{
+            @extend .submenuShow;
+          }
+        }
+        &:before{
+          border: solid;
+          border-color: $blueGrey transparent;
+          border-width: 0px 8px 8px 8px;
+          top: 2px;
+          content: "";
+          left: 10%;
+          position: absolute;
+          z-index: 99;
+        }
+      }
+    }
+  }
   #mainNav{
     @extend .fleft;
   }
   #secondaryNav{
     @extend .fright;
-  }
-  a{
-    color: $white;
-    font-weight: normal;
-    text-decoration: none;
-  }
-  a:hover, a:focus{
-    color: $grey;
-  }
-  i{
-    font-size: 14pt;
-  }
-  .dropdown ul.submenu-1, .dropdown ul.submenu-2{
-    @extend .visuallyHidden;
-  }
-  #mainNav > ul, #secondaryNav > ul{
-    margin: 65px 0px 0px 0px;
-  }
-  ul li{
-    list-style-type: none;
-  }
-  #mainNav > ul > li, #secondaryNav > ul > li{
-    display: inline-block;
-    list-style-type: none;
-    margin-right: 0px;
-    padding-right: 8px;
-    padding-left: 3px;
-    border-right: 1px solid $white;
-  }
-  #mainNav > ul > li:last-child, #secondaryNav > ul > li:last-child{
-    border-right: none;
-  }
-  .dropdown ul.submenu-1:before{
-    border: solid;
-    border-color: $blueGrey transparent;
-    border-width: 0px 8px 8px 8px;
-    top: 2px;
-    content: "";
-    left: 10%;
-    position: absolute;
-    z-index: 99;
-  }
-  .dropdown:hover ul.submenu-1, .dropdown:focus ul.submenu-1, .dropdown > a:focus + ul.submenu-1, .dropdown.active ul.submenu-1, .dropdown ul li.dropdown:hover ul.submenu-2, .dropdown ul li.dropdown:focus ul.submenu-2, .dropdown ul li.dropdown > a:focus ul.submenu-2, .dropdown ul li.dropdown.active ul.submenu-2{
-    @extend .submenuShow;
-  }
-  .submenu-1, .submenu-2{
-    a{
-      font-size: 10pt;
-      color: #000;
+    > ul li > ul li.dropdown > a:before{
+      content: "\f053";
+      float: left;
+      margin: .25em 8px 0px 0px;
     }
-    a:hover, a:focus{
-      color: $white;
+    .submenu-1{
+      right: 2px;
+      li a{
+        float: right;
+      }
+      li:after{
+        @extend .group:after;
+      }
+      &:before{
+        right: 10%;
+        left: auto !important;
+      }
     }
-    li{
-      position: relative;
-      padding: 2px 10px 2px 10px;
-      background: $blueGrey;
-    }
-    li:first-child{
-      padding-top: 8px;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-    }
-    li:last-child{
-      padding-bottom: 8px;
-      border-bottom-left-radius: 4px;
-      border-bottom-right-radius: 4px; 
+    .submenu-2{
+      left: -140px;
     }
   }
-  li.dropdown{
-    max-height: 1em;
-  }
-  #mainNav .submenu-1 > li.dropdown > a:after{
-    content: "\f054";
-    font-family: "FontAwesome";
-    float: right;
-    margin: .4em 0px 0px 8px;
-    font-size: 9pt;
-  }
-  .dropdown li > .submenu-2{
-    left: 193px;
-    top: -10px;
-    position: absolute;
-  }
-  #secondaryNav .submenu-1{
-    right: 2px;
-  }
-  #secondaryNav .submenu-1 li:after{
-    @extend .group:after;
-  }
-  #secondaryNav .submenu-1 li a{
-    float: right;
-  }
-  #secondaryNav .dropdown ul.submenu-1:before{
+  /* #secondaryNav .dropdown ul.submenu-1:before{
     right: 10%;
     left: auto;
-  }
-  #secondaryNav .submenu-2{
-    left: -140px;
-  }
-  #secondaryNav .submenu-1 > li.dropdown > a:before{
-    content: "\f053";
-    font-family: "FontAwesome";
-    float: left;
-    margin: .25em 8px 0px 0px;
-    font-size: 9pt;
-  }
+  }*/
+
 }
 
 #content{
