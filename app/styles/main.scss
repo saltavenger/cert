@@ -124,13 +124,13 @@ nav#headerNav{
     font-weight: normal;
     text-decoration: none;
     &:hover, &:focus{
-      color: $grey;
+      color: #ccc;
     }
   }
   i{
     font-size: 14pt;
   }
-  #mainNav > ul, #secondaryNav > ul{
+  #mainMenu, #secondaryMenu{
     margin: 65px 0px 0px 0px;
     li{
       list-style-type: none;
@@ -152,6 +152,9 @@ nav#headerNav{
       {
         @extend .submenuShow;
       }
+      &.active > a{
+        color: #ccc;
+      }
       ul.submenu-1, ul.submenu-2{
         a{
           font-size: 10pt;
@@ -160,7 +163,7 @@ nav#headerNav{
             color: $white;
           }
         }        
-        li{
+        li{          
           position: relative;
           padding: 2px 10px 2px 10px;
           background: $blueGrey;
@@ -174,17 +177,25 @@ nav#headerNav{
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
           }
+          &.dropdown.active > a{
+            color: $white;
+          }          
         }
       }
       ul.submenu-1{
         @extend .visuallyHidden;
         li.dropdown{
-          > a:after{
-            content: "\f054";
-            font-family: "FontAwesome";
-            float: right;
-            margin: .4em 0px 0px 8px;
-            font-size: 9pt;
+          > a{
+            &:after{
+              content: "\f054";
+              font-family: "FontAwesome";
+              float: right;
+              margin: .4em 0px 0px 8px;
+              font-size: 9pt;
+            }
+            &:hover + ul.submenu-2, &:focus + ul.submenu-2{
+              @extend .submenuShow;
+            }
           }
           ul.submenu-2{
             @extend .visuallyHidden;
@@ -193,7 +204,6 @@ nav#headerNav{
             position: absolute;
           }
           &:hover ul.submenu-2, &:focus ul.submenu-2,
-          > a:hover + ul.submenu-2, > a:focus + ul.submenu-2,
           &.active ul.submenu-2{
             @extend .submenuShow;
           }
@@ -216,15 +226,15 @@ nav#headerNav{
   }
   #secondaryNav{
     @extend .fright;
-    > ul li > ul li.dropdown > a:before{
-      content: "\f053";
-      float: left;
-      margin: .25em 8px 0px 0px;
-    }
     .submenu-1{
       right: 2px;
       li a{
         float: right;
+      }
+      li.dropdown > a:before{
+        content: "\f053";
+        float: left;
+        margin: .25em 8px 0px 0px;
       }
       li:after{
         @extend .group:after;

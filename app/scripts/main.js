@@ -1,11 +1,46 @@
 'use strict';
 
 (function(){
-  $('li.dropdown, li.dropdown a').on('mouseenter focus', function(){
-    $(this).closest('.dropdown').addClass('active');
-  }).on('mouseleave blur', function(){
-    $(this).closest('.dropdown').removeClass('active');
+  $('#mainNav ul li, #secondaryNav ul li').on('mouseover focus', function(){
+    event.stopPropagation();
+    var topLevel = $(this).parents('.dropdown').length === 0 && ($(this).parent().attr('id') === 'mainMenu' || $(this).parent().attr('id') === 'secondaryNav');
+    if(topLevel){
+      $(this).addClass('active');
+    }
+    else{
+      if($(this).hasClass('dropdown')){
+        $(this).addClass('active');
+      }
+      $(this).parents('.dropdown').addClass('active');
+    }   
+  }).on('mouseout blur', function(){
+    if($(this).parents('.dropdown').length === 0){
+      $(this).removeClass('active');
+    }
+    else{
+      if($(this).hasClass('dropdown')){
+        $(this).removeClass('active');
+      }
+      $(this).parents('.dropdown').removeClass('active');
+    }
   });
+
+  $('#mainNav ul li a, #secondaryNav ul li a').on('mouseover focus', function(){
+    if($(this).parent().parents('.dropdown').length === 0){
+      $(this).parent().addClass('active');
+    }
+    else{
+      $(this).parents('.dropdown').addClass('active');
+    }
+  }).on('mouseout blur', function(){
+    if($(this).parent().parents('.dropdown').length === 0){
+      $(this).parent().removeClass('active');
+    }
+    else{
+      $(this).parents('.dropdown').removeClass('active');
+    }
+  });
+  
 
   $(window).on("resize", function() {
     kendo.resize($(".dashItem"));
