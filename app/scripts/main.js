@@ -1,47 +1,54 @@
 'use strict';
 
 (function(){
-  $('#mainNav ul li, #secondaryNav ul li').on('mouseover focus', function(){
-    event.stopPropagation();
-    var topLevel = $(this).parents('.dropdown').length === 0 && ($(this).parent().attr('id') === 'mainMenu' || $(this).parent().attr('id') === 'secondaryNav');
-    if(topLevel){
-      $(this).addClass('active');
-    }
-    else{
-      if($(this).hasClass('dropdown')){
-        $(this).addClass('active');
-      }
-      $(this).parents('.dropdown').addClass('active');
-    }   
-  }).on('mouseout blur', function(){
-    if($(this).parents('.dropdown').length === 0){
-      $(this).removeClass('active');
-    }
-    else{
-      if($(this).hasClass('dropdown')){
-        $(this).removeClass('active');
-      }
-      $(this).parents('.dropdown').removeClass('active');
-    }
-  });
 
-  $('#mainNav ul li a, #secondaryNav ul li a').on('mouseover focus', function(){
-    if($(this).parent().parents('.dropdown').length === 0){
-      $(this).parent().addClass('active');
-    }
-    else{
-      $(this).parents('.dropdown').addClass('active');
-    }
-  }).on('mouseout blur', function(){
-    if($(this).parent().parents('.dropdown').length === 0){
-      $(this).parent().removeClass('active');
-    }
-    else{
-      $(this).parents('.dropdown').removeClass('active');
-    }
-  });
+  $.fn.setup_navigation = function(settings) {
+    settings = jQuery.extend({
+      menuHoverClass: 'active',
+    }, settings);
+    
+    // Set tabIndex to -1 so that links can't receive focus until menu is open
+    $(this).find('> li > a').next('ul').find('a').attr('tabIndex',-1);
+    $(this).find('> li > ul > li > a').next('ul').find('a').attr('tabIndex',-1);
+    
+    $(this).find('> li > a').hover(function(){
+      $(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+    });
+    $(this).find('> li > ul > li >a').hover(function(){
+      $(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+    });
+    $(this).find('> li > a').focus(function(){
+      $(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+      $(this).next('ul')
+        .addClass(settings.menuHoverClass)
+        .find('a').attr('tabIndex',0);
+    });
+    $(this).find('> li > ul > li > a').focus(function(){
+      $(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+      $(this).next('ul')
+        .addClass(settings.menuHoverClass)
+        .find('a').attr('tabIndex',0);
+    });
+
+      // Hide menu if click or focus occurs outside of navigation
+    $(this).find('a').last().keydown(function(e){ 
+      if(e.keyCode == 9) {
+        // If the user tabs out of the navigation hide all menus
+        $('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+      }
+    });
+    $(document).click(function(){ $('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1); });
+    
+    $(this).click(function(e){
+      e.stopPropagation();
+    });
+  }
+
+  $('#mainMenu, #secondaryMenu').setup_navigation();
+
   
 
+  
   $(window).on('resize', function() {
     kendo.resize($('.dashItem'));
   });
@@ -91,6 +98,11 @@
         }
       },
       dash3Options = {
+        chartArea: {
+          margin: {
+            right: 50
+          }
+        },
         series: [{
           type: 'horizontalWaterfall',
           field: 'count',
@@ -98,12 +110,21 @@
           summaryField: 'summary',
           color: function(point){
             return chartColors[point.index];
+          },
+          labels: {
+            visible: true,
+            template: "#= category#",
+            position: "insideBase",
+            color: "#888888"
           }
         }],
+        categoryAxis: {
+          labels:{
+            visible: false
+          }
+        },
         legend: {
           visible: false
-        },
-        categoryAxis:{
         },
         tooltip:{
           visible: true,
@@ -117,12 +138,19 @@
           stack: true
         }],
         legend: {
-          visible: true
+          visible: true,
+          position: 'right',
+          orientation: 'vertical',
+          labels:{
+            template: '#var label= text;# # label= label.split(" ");# #if(label.length > 3){ label = label.map(function(el, i){ if((i+1)%3 === 0){ return el + "\\n"; } else{ return el } });}# # label = label.join(" ");# #=label#',
+            padding: {
+              bottom: 10
+            }
+          }
         },
         categoryAxis:{
           labels:{
-            visible: false
-          }
+            visible: false          }
         },
         tooltip:{
           visible: true,
