@@ -2,7 +2,7 @@
 
 (function(){
 
-  $.fn.setup_navigation = function(settings) {
+  $.fn.setupNavigation = function(settings) {
     settings = jQuery.extend({
       menuHoverClass: 'active',
     }, settings);
@@ -42,9 +42,9 @@
     $(this).click(function(e){
       e.stopPropagation();
     });
-  }
+  };
 
-  $('#mainMenu, #secondaryMenu').setup_navigation();
+  $('#mainMenu, #secondaryMenu, #mobileMenu').setupNavigation();
 
   
 
@@ -113,9 +113,9 @@
           },
           labels: {
             visible: true,
-            template: "#= category#",
-            position: "insideBase",
-            color: "#888888"
+            template: '#= category#',
+            position: 'insideBase',
+            color: '#888888'
           }
         }],
         categoryAxis: {
