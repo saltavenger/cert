@@ -209,7 +209,8 @@ module.exports = function (grunt) {
             '<%= config.dist %>/styles/{,*/}*.css',
             '<%= config.dist %>/images/{,*/}*.*',
             '<%= config.dist %>/styles/fonts/{,*/}*.*',
-            '<%= config.dist %>/*.{ico,png}'
+            '<%= config.dist %>/*.{ico,png}',
+            '!<%= config.dist %>/scripts/certData.js'
           ]
         }
       }
@@ -321,7 +322,8 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             'images/{,*/}*.webp',
             '{,*/}*.html',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*',
+            'scripts/{,*/}*.*'
           ]
         }, {
           src: 'node_modules/apache-server-configs/dist/.htaccess',
@@ -330,7 +332,7 @@ module.exports = function (grunt) {
         { //for font-awesome
           expand: true,
           dot: true,
-          cwd: 'bower_components/font-awesome',
+          cwd: 'bower_components/fontawesome',
           src: ['fonts/*.*'],
           dest: '<%= config.dist %>'
         }]

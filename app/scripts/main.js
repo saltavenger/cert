@@ -56,7 +56,7 @@
   var getData = new kendo.data.DataSource({
     transport: {
       read: {
-        url: 'scripts/certData',
+        url: 'scripts/certData.js',
         contentType: 'application/json',
         dataType: 'json'
       }

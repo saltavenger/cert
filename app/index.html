@@ -209,7 +209,7 @@
     <footer role="contentinfo" class="group">
       <div id="logoContainer">
         <p>POWERED BY</p>
-        <img src="../images/abt_assoc_logo_485_rgb_white.png" />
+        <img src="images/abt_assoc_logo_485_rgb_white.png" />
       </div>
       <div id="footerMain">
         <nav id="footerNav" role="navigation">
@@ -238,8 +238,7 @@
     <!-- endbuild -->
 
     <script src="//da7xgjtj801h2.cloudfront.net/2015.2.624/js/kendo.all.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="scripts/us-states.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -249,7 +248,9 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
-
+    <!-- build:js({app,.tmp}) scripts/us-states.js -->
+    <script src="scripts/us-states.js"></script>
+    <!-- endbuild -->
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
