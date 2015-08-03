@@ -30,8 +30,8 @@
         .find('a').attr('tabIndex',0);
     });
 
-      // Hide menu if click or focus occurs outside of navigation
-    $(this).find('a').last().keydown(function(e){ 
+    // Hide menu if click or focus occurs outside of navigation
+    $(this).find('a').last().keydown(function(e){
       if(e.keyCode == 9) {
         // If the user tabs out of the navigation hide all menus
         $('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
@@ -44,9 +44,9 @@
     });
   };
 
-  $('#mainMenu, #secondaryMenu, #mobileMenu').setupNavigation();
-
-  
+  $('#mainMenu').setupNavigation();
+  $('#secondaryMenu').setupNavigation();
+  $('#mobileMenu').setupNavigation();
 
   
   $(window).on('resize', function() {

@@ -129,9 +129,6 @@ nav#headerNav{
   #mainMenu, #secondaryMenu, #mobileMenu{
     position: relative;
     margin: 65px 0px 0px 0px;
-    li{
-      list-style-type: none;
-    }
     > li{
       display: inline-block;
       margin-right: 0px;
@@ -145,13 +142,8 @@ nav#headerNav{
         color: $white;
       }
     }
-  }
-  #mobileMenu{
-    display: none;
-    @extend .fright;
-  }
-  #mainMenu, #secondaryMenu, #mobileMenu{
     li{
+      list-style-type: none;
       &:hover > a, &:focus >a, &:active >a{
         color: #ccc;
       }
@@ -169,10 +161,11 @@ nav#headerNav{
               color: $white;
             }
           }        
-          li{          
+          li{
+            width: 100%;         
             position: relative;
-            padding: 2px 10px 2px 10px;
             background: $blueGrey;
+            padding: 2px 0px 2px 0px;
             &:first-child{
               padding-top: 8px;
               border-top-left-radius: 4px;
@@ -185,7 +178,7 @@ nav#headerNav{
             }
             &:hover > a, &:focus > a, &:active > a{
               color: $white;
-            }         
+            }        
           }
         }
       }
@@ -204,7 +197,7 @@ nav#headerNav{
         }
         ul.submenu-2{
           @extend .visuallyHidden;
-          left: 193px;
+          left: 100.5%;
           top: -10px;
           position: absolute;
           &.active{
@@ -230,35 +223,43 @@ nav#headerNav{
   #mainNav{
     @extend .fleft;
     #mainMenu{
+      .submenu-1, .submenu-2{
+        li a{
+          margin: 0px 10px 0px 10px;
+        }
+      }
       .submenu-1 li.dropdown > a:after{
         content: "\f054";
         font-family: "FontAwesome";
         float: right;
-        margin: .4em 0px 0px 8px;
+        margin: .5em 10px 0px 8px;
         font-size: 9pt;
       }
     }
   }
-  #secondaryNav{
+  #secondaryNav, #mobileNav{
     @extend .fright;
-    #secondaryMenu{
+    #secondaryMenu, #mobileMenu{
       .submenu-1{
         right: 2px;
         li > a{
           text-align: right;
           float: right;
+          margin: 0px 10px 0px 10px;
         }
         li.dropdown{
           ul.submenu-2{
-            left: -123px;
+            left: auto;
+            right: 100.5%;
           }
           & > a{
             width: 100%;
+            margin-left: 30px;
           }
           & > a:before{
             content: "\f053";
             float: left;
-            margin: .25em 8px 0px 0px;
+            margin: .25em 0px 0px 20px;
             font-family: "FontAwesome";
             font-size: 9pt;
           }
@@ -267,103 +268,15 @@ nav#headerNav{
           @extend .group:after;
         }
         &:before{
-          right: 10%;
+          right: 5%;
           left: auto !important;
         }
       }
     }
   }
-  /* #secondaryNav .dropdown ul.submenu-1:before{
-    right: 10%;
-    left: auto;
-  }*/
-  /*#mobileNav{
+  #mobileNav{
     display: none;
-    @extend .fright;
-    #mobileMenu{
-      li.dropdown{
-        &:hover ul.submenu-1, &:focus ul.submenu-1, &:active ul.submenu-1,
-        > a:hover + ul.submenu-1, > a:focus + ul.submenu-1, > a:active + ul.submenu-1{
-          @extend .submenuShow;
-        }
-        &.active > a{
-          color: #ccc;
-        }
-        ul.submenu-1, ul.submenu-2, ul.submenu-3{
-          @extend .visuallyHidden;
-          right: 2px;
-          z-index: 999;
-          a{
-            width: 100%;
-            float: left;
-            font-size: 10pt;
-            color: #000;
-            &:hover, &:focus, &:active{
-              color: $white;
-            }
-          }        
-          li{ 
-            &:after{
-              @extend .group:after;
-            }         
-            position: relative;
-            padding: 2px 10px 2px 10px;
-            background: $blueGrey;
-            &:first-child{
-              padding-top: 8px;
-              border-top-left-radius: 4px;
-              border-top-right-radius: 4px;
-            }
-            &:last-child{
-              padding-bottom: 8px;
-              border-bottom-left-radius: 4px;
-              border-bottom-right-radius: 4px;
-            }
-            &.dropdown.active > a{
-              color: $white;
-            }
-          }
-          li.dropdown{
-            > a{
-              &:after{
-                content: "\f054";
-                float: right;
-                margin: .25em 8px 0px 0px;
-                font-family: "FontAwesome";
-                font-size: 9pt;
-              }
-              &:hover + ul.submenu-2, &:focus + ul.submenu-2, &:active + ul.submenu-2{
-                @extend .submenuShow;
-              }
-            }
-              /*ul.submenu-2{
-                @extend .visuallyHidden;
-                left: -140px;
-                top: -10px;
-                position: absolute;
-              }
-              &:hover ul.submenu-2, &:focus ul.submenu-2,
-              &.active ul.submenu-2{
-                @extend .submenuShow;
-              }
-          }
-          &:before{
-            border: solid;
-            border-color: $blueGrey transparent;
-            border-width: 0px 8px 8px 8px;
-            top: 2px;
-            content: "";
-            right: 10%;
-            position: absolute;
-            z-index: 99;
-          }
-        }
-        .submenu-2 li.dropdown > a:hover + ul.submenu-3, .submenu-2 li.dropdown > a:focus + ul.submenu-3, .submenu-2 li.dropdown > a:active + ul.submenu-3{
-          @extend .submenuShow;
-        }
-      }
-    }
-  }*/
+  }
 }
 
 #content{
@@ -473,7 +386,7 @@ footer{
   #mainNav, #secondaryNav{
     display: none;
   }
-  #mobileNav, nav#headerNav #mobileMenu{
+  nav#headerNav #mobileNav, nav#headerNav #mobileMenu{
     display: block;
   }
 }
