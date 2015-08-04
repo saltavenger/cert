@@ -2,53 +2,118 @@
 
 (function(){
 
-  $.fn.setupNavigation = function(settings) {
-    settings = jQuery.extend({
-      menuHoverClass: 'active',
-    }, settings);
+  $.fn.setupNavigation = function() {
+    var hoverClass = 'active';
     
     // Set tabIndex to -1 so that links can't receive focus until menu is open
     $(this).find('> li > a').next('ul').find('a').attr('tabIndex',-1);
     $(this).find('> li > ul > li > a').next('ul').find('a').attr('tabIndex',-1);
     
     $(this).find('> li > a').hover(function(){
-      $(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+      $(this).closest('ul').find('.'+ hoverClass).removeClass(hoverClass).find('a').attr('tabIndex',-1);
     });
-    $(this).find('> li > ul > li >a').hover(function(){
-      $(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+    $(this).find('> li > ul > li > a').hover(function(){
+      $(this).closest('ul').find('.'+ hoverClass).removeClass(hoverClass).find('a').attr('tabIndex',-1);
+    });
+    $(this).find('> li > ul > li > ul > li > a').hover(function(){
+      $(this).closest('ul').find('.'+ hoverClass).removeClass(hoverClass).find('a').attr('tabIndex',-1);
     });
     $(this).find('> li > a').focus(function(){
-      $(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+      $(this).closest('ul').find('.'+ hoverClass).removeClass(hoverClass).find('a').attr('tabIndex',-1);
       $(this).next('ul')
-        .addClass(settings.menuHoverClass)
+        .addClass(hoverClass)
         .find('a').attr('tabIndex',0);
     });
     $(this).find('> li > ul > li > a').focus(function(){
-      $(this).closest('ul').find('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+      $(this).closest('ul').find('.'+ hoverClass).removeClass(hoverClass).find('a').attr('tabIndex',-1);
       $(this).next('ul')
-        .addClass(settings.menuHoverClass)
+        .addClass(hoverClass)
+        .find('a').attr('tabIndex',0);
+    });
+    $(this).find('> li > ul > li > ul > li > a').focus(function(){
+      $(this).closest('ul').find('.'+hoverClass).removeClass(hoverClass).find('a').attr('tabIndex',-1);
+      $(this).next('ul')
+        .addClass(hoverClass)
         .find('a').attr('tabIndex',0);
     });
 
     // Hide menu if click or focus occurs outside of navigation
     $(this).find('a').last().keydown(function(e){
-      if(e.keyCode == 9) {
+      if(e.keyCode === 9) {
         // If the user tabs out of the navigation hide all menus
-        $('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1);
+        $('.'+hoverClass).removeClass(hoverClass).find('a').attr('tabIndex',-1);
       }
     });
-    $(document).click(function(){ $('.'+settings.menuHoverClass).removeClass(settings.menuHoverClass).find('a').attr('tabIndex',-1); });
+    $(document).click(function(){ $('.'+hoverClass).removeClass(hoverClass).find('a').attr('tabIndex',-1); });
     
     $(this).click(function(e){
       e.stopPropagation();
     });
   };
 
+  $.fn.setupMobileNavigation = function(navName) {
+    var ShowObj = {
+      'height': 'auto',
+      'width': 'auto',
+      'margin': 'auto',
+      'padding': '10px 0px 0px 0px',
+      'line-height': 'inherit',
+      'opacity': '1',
+      'overflow': 'visible',
+      'pointer-events': 'auto',
+      'white-space': 'nowrap',
+      'visibility': 'visible',
+      'top': '20px'
+    },
+    HideObj = {
+      'height': '1px',
+      'width': '1px',
+      'line-height': '2em',
+      'margin': '-1px',
+      'opacity': '0',
+      'overflow': 'hidden',
+      'pointer-events': 'none',
+      'position': 'absolute'
+    };
+
+    $(navName + ' > li > a').click(function(e){
+      e.preventDefault();
+      if($(this).attr('aria-pressed') === 'false'){
+        $(navName + ' .submenu-1').css(ShowObj);
+        $(this).attr('aria-pressed', 'true');
+      }
+      else{
+        $(navName + ' .submenu-1, ' + navName + ' .submenu-2, ' + navName + ' .submenu-3').css(HideObj);
+        $(this).attr('aria-pressed', 'false');
+      }
+    });
+
+    $('ul > li > ul li > a, ul > li > ul li').click(function(e){
+      e.stopPropagation();
+      if($(this).hasClass('dropdown') || $(this).parent().hasClass('dropdown')){
+        e.preventDefault();
+        var currMenu = $(this).closest('ul'),
+        currLevel = currMenu.attr('class'),
+        targetLevel = parseInt(currLevel.charAt(currLevel.length-1))+1;
+        if(this.nodeName === 'LI'){
+        
+        }
+        else if(this.nodeName === 'A'){
+          var index = $(this).parent().index()+1,
+            showCpy = Object.create(ShowObj);
+          showCpy.top = targetLevel === 2 ? -23*index + 7 + 'px': -23*index + 4 + 'px';
+          currMenu.css('visibility', 'hidden');
+          $(this).next('.submenu-' + targetLevel).css(showCpy);
+        }
+      }
+    });
+  };
+
   $('#mainMenu').setupNavigation();
   $('#secondaryMenu').setupNavigation();
-  $('#mobileMenu').setupNavigation();
-
+  $('#mobileMenu').setupMobileNavigation('#mobileMenu');
   
+
   $(window).on('resize', function() {
     kendo.resize($('.dashItem'));
   });
@@ -56,7 +121,7 @@
   var getData = new kendo.data.DataSource({
     transport: {
       read: {
-        url: 'scripts/certData.js',
+        url: 'scripts/certData.json',
         contentType: 'application/json',
         dataType: 'json'
       }
