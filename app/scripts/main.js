@@ -52,38 +52,30 @@
   };
 
   $.fn.setupMobileNavigation = function(navName) {
-    var ShowObj = {
-      'height': 'auto',
-      'width': 'auto',
-      'margin': 'auto',
-      'padding': '10px 0px 0px 0px',
-      'line-height': 'inherit',
-      'opacity': '1',
-      'overflow': 'visible',
-      'pointer-events': 'auto',
-      'white-space': 'nowrap',
-      'visibility': 'visible',
-      'top': '20px'
-    },
-    HideObj = {
-      'height': '1px',
-      'width': '1px',
-      'line-height': '2em',
-      'margin': '-1px',
-      'opacity': '0',
-      'overflow': 'hidden',
-      'pointer-events': 'none',
-      'position': 'absolute'
+    var ShowObj = function(top){
+      this.height = 'auto';
+      this.width = 'auto';
+      this.margin = 'auto';
+      this.padding = '10px 0px 0px 0px';
+      this['line-height'] = 'inherit';
+      this.opacity = '1';
+      this.overflow = 'visible';
+      this['pointer-events'] = 'auto';
+      this['white-space'] = 'nowrap';
+      this.visibility = 'visible';
+      if(top !== null){//excludes top css for back buttons, defaults to 20px unless otherwise set
+        this.top = typeof top === 'undefined' ? '20px' : top;
+      }
     };
-
+    
     $(navName + ' > li > a').click(function(e){
       e.preventDefault();
       if($(this).attr('aria-pressed') === 'false'){
-        $(navName + ' .submenu-1').css(ShowObj);
+        $(navName + ' .submenu-1').css(new ShowObj());
         $(this).attr('aria-pressed', 'true');
       }
       else{
-        $(navName + ' .submenu-1, ' + navName + ' .submenu-2, ' + navName + ' .submenu-3').css(HideObj);
+        $(navName + ' .submenu-1, ' + navName + ' .submenu-2, ' + navName + ' .submenu-3').css('visibility', 'hidden');
         $(this).attr('aria-pressed', 'false');
       }
     });
@@ -96,17 +88,58 @@
         currLevel = currMenu.attr('class'),
         targetLevel = parseInt(currLevel.charAt(currLevel.length-1))+1;
         if(this.nodeName === 'LI'){
-        
+          var indexLI = $(this).index()+1,
+              top = targetLevel === 2 ? -23*indexLI + 7 + 'px': -23*indexLI + 4 + 'px',
+              targetMenu = $(this).children('.submenu-' + targetLevel);
+          currMenu.css('visibility', 'hidden');
+          targetMenu.css(new ShowObj(top));
+          targetMenu.children('li:first-child').children('a').focus();
         }
         else if(this.nodeName === 'A'){
-          var index = $(this).parent().index()+1,
-            showCpy = Object.create(ShowObj);
-          showCpy.top = targetLevel === 2 ? -23*index + 7 + 'px': -23*index + 4 + 'px';
+          var indexLI = $(this).parent().index()+1,
+              top = targetLevel === 2 ? -23*indexLI + 7 + 'px': -23*indexLI + 4 + 'px',
+              targetMenu = $(this).next('.submenu-' + targetLevel);
           currMenu.css('visibility', 'hidden');
-          $(this).next('.submenu-' + targetLevel).css(showCpy);
+          targetMenu.css(new ShowObj(top));
+          targetMenu.children('li:first-child').children('a').focus();
+        }
+      }
+      else if($(this).hasClass('prevLevel') || $(this).parent().hasClass('prevLevel')){
+        e.preventDefault();
+        var currMenu = $(this).closest('ul'),
+            currLevel = currMenu.attr('class'),
+            targetLevel = parseInt(currLevel.charAt(currLevel.length-1))-1,
+            targetMenu = $(this).closest('.submenu-' + targetLevel);
+        if(this.nodeName === 'LI'){
+          currMenu.css('visibility', 'hidden');
+          targetMenu.css(new ShowObj(null));
+          targetMenu.children('li:first-child').children('a').focus();
+        }
+        else if(this.nodeName === 'A'){
+          currMenu.css('visibility', 'hidden');
+          targetMenu.css(new ShowObj(null));
+          targetMenu.children('li:first-child').children('a').focus();
         }
       }
     });
+
+    $(this).find('ul li:last-child a').keydown(function(e){
+      if(e.keyCode === 9) {
+        // If the user tabs out of the navigation hide all menus
+        $(navName + ' .submenu-1, ' + navName + ' .submenu-2, ' + navName + ' .submenu-3').css('visibility', 'hidden');
+        $(navName + ' > li > a').attr('aria-pressed', 'false');
+      }
+    });
+
+    $(document).click(function(event) { 
+        if(!$(event.target).closest(navName).length) {
+            if($(navName + ' ul').is(':visible')) {
+              $(navName + ' ul').css('visibility', 'hidden');
+              $(navName + ' > li > a').attr('aria-pressed', 'false');
+            }
+        }        
+    });
+
   };
 
   $('#mainMenu').setupNavigation();
