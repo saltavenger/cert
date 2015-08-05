@@ -73,6 +73,7 @@
       if($(this).attr('aria-pressed') === 'false'){
         $(navName + ' .submenu-1').css(new ShowObj());
         $(this).attr('aria-pressed', 'true');
+        $('.submenu-1 > li:first-child > a').focus();
       }
       else{
         $(navName + ' .submenu-1, ' + navName + ' .submenu-2, ' + navName + ' .submenu-3').css('visibility', 'hidden');
@@ -92,6 +93,7 @@
               top = targetLevel === 2 ? -23*indexLI + 7 + 'px': -23*indexLI + 4 + 'px',
               targetMenu = $(this).children('.submenu-' + targetLevel);
           currMenu.css('visibility', 'hidden');
+          $(this).attr('aria-expanded', 'true');
           targetMenu.css(new ShowObj(top));
           targetMenu.children('li:first-child').children('a').focus();
         }
@@ -100,6 +102,7 @@
               top = targetLevel === 2 ? -23*indexLI + 7 + 'px': -23*indexLI + 4 + 'px',
               targetMenu = $(this).next('.submenu-' + targetLevel);
           currMenu.css('visibility', 'hidden');
+          $(this).parent().attr('aria-expanded', 'true');
           targetMenu.css(new ShowObj(top));
           targetMenu.children('li:first-child').children('a').focus();
         }
@@ -112,11 +115,13 @@
             targetMenu = $(this).closest('.submenu-' + targetLevel);
         if(this.nodeName === 'LI'){
           currMenu.css('visibility', 'hidden');
+          $(this).parent().closest('li.dropdown').attr('aria-expanded', 'false');
           targetMenu.css(new ShowObj(null));
           targetMenu.children('li:first-child').children('a').focus();
         }
         else if(this.nodeName === 'A'){
           currMenu.css('visibility', 'hidden');
+          $(this).parent().parent().closest('li.dropdown').attr('aria-expanded', 'false');
           targetMenu.css(new ShowObj(null));
           targetMenu.children('li:first-child').children('a').focus();
         }
