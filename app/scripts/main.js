@@ -159,7 +159,7 @@
   var getData = new kendo.data.DataSource({
     transport: {
       read: {
-        url: 'scripts/certData.json',
+        url: 'scripts/certData.js',
         contentType: 'application/json',
         dataType: 'json'
       }
@@ -187,6 +187,11 @@
         }
       },
       dash2Options = {
+        dataSource: {
+          group: {
+            field: "metric"
+          }
+        },
         series: [{
           field: 'value',
           categoryField: 'group',
@@ -201,30 +206,24 @@
         }
       },
       dash3Options = {
-        chartArea: {
-          margin: {
-            right: 50
-          }
+        dataSource: {
+          sort: { field: 'count', dir: 'asc'}
         },
         series: [{
-          type: 'horizontalWaterfall',
+          gap: 0,
+          type: 'bar',
           field: 'count',
           categoryField: 'orgtype',
-          summaryField: 'summary',
-          color: function(point){
-            return chartColors[point.index];
+          color: function(p){
+            return chartColors[p.index];
           },
           labels: {
             visible: true,
-            template: '#= category#',
-            position: 'insideBase',
-            color: '#888888'
+            template: '#var label = category;# #if(label === "All Organizations"){ label = ""; }# #= label#'
           }
         }],
-        categoryAxis: {
-          labels:{
-            visible: false
-          }
+        categoryAxis:{
+          visible: false
         },
         legend: {
           visible: false
@@ -235,9 +234,17 @@
         }
       },
       dash4Options ={
+        dataSource: {
+          group: {
+            field: 'number_in_outline',
+            dir: 'desc'
+          }
+        },
         series: [{
+          gap: 0.5,
           field: 'number_in_outline',
           categoryField: 'outline_number',
+          name: "#= group.items[0].outline_description #",
           stack: true
         }],
         legend: {
@@ -245,7 +252,7 @@
           position: 'right',
           orientation: 'vertical',
           labels:{
-            template: '#var label= text;# # label= label.split(" ");# #if(label.length > 3){ label = label.map(function(el, i){ if((i+1)%3 === 0){ return el + "\\n"; } else{ return el } });}# # label = label.join(" ");# #=label#',
+            template: '#var label= text;# #console.log(label);# # label= label.split(" ");# #if(label.length > 3){ label = label.map(function(el, i){ if((i+1)%3 === 0){ return el + "\\n"; } else{ return el } });}# # label = label.join(" ");# #=label#',
             padding: {
               bottom: 10
             }
@@ -263,9 +270,9 @@
       };
       
       buildChart('dash1', objData.response, 'docketData', dash1Options, chart1Colors, 'Comments in Docket vs Comments in CommentCounts');
-      buildChart('dash2', objData.response, 'commentData', dash2Options, chart2Colors, 'Total Comment Excerpts vs Total Responses', 'metric');
+      buildChart('dash2', objData.response, 'commentData', dash2Options, chart2Colors, 'Total Comment Excerpts vs Total Responses');
       buildChart('dash3', objData.response, 'orgTypeData', dash3Options, chartColors, 'Comments by Organization Type');
-      buildChart('dash4', objData.response, 'headerData', dash4Options, chartColors, 'Top Five Outline Headings (Comment Excerpts)', 'outline_number');
+      buildChart('dash4', objData.response, 'headerData', dash4Options, chartColors, 'Top Five Outline Headings (Comment Excerpts)');
       
 
       var certData = objData.response[0].stateData,
@@ -286,7 +293,7 @@
 
       zoomHome.addTo(map);
 
-      L.tileLayer('https://{s}.tiles.mapbox.com/v4/aareskog.n05p31e9/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYWFyZXNrb2ciLCJhIjoiUE9xRko2VSJ9.JrYWM5Ru2ocTP5zafKmdKw', {
+      L.tileLayer('https://{s}.tiles.mapbox.com/v4/malachowskim.5b78ba95/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFsYWNob3dza2ltIiwiYSI6IjUwNzZiZmNiNjFkM2M4MWJhNTcxMTUzYjI4ZTcxMWE5In0.oCXLFI_lGpW_9y8Lpc3MTQ', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
           '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -327,7 +334,7 @@
           weight: 1,
           opacity: 1,
           color: '#ffffff',
-          fillOpacity: 0.7,
+          fillOpacity:1,
           fillColor: getColor(range)
         };
       }
@@ -415,7 +422,7 @@
     }
   }
 
-  function buildChart(id, data, dataSchema, chartOptions, chartColors, title, groupField){
+  function buildChart(id, data, dataSchema, chartOptions, chartColors, title){
     var baseOptions = {
       theme: 'material',
       dataSource: {
@@ -432,9 +439,6 @@
       seriesColors: chartColors
     },
     kendoOptions = $.extend(true, baseOptions, chartOptions);
-    if(typeof groupField !== 'undefined'){
-      kendoOptions.dataSource.group = { field: groupField};
-    }
     $('#' + id).kendoChart(kendoOptions);
   }
 

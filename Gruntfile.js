@@ -210,7 +210,7 @@ module.exports = function (grunt) {
             '<%= config.dist %>/images/{,*/}*.*',
             '<%= config.dist %>/styles/fonts/{,*/}*.*',
             '<%= config.dist %>/*.{ico,png}',
-            '!<%= config.dist %>/scripts/certData.json'
+            '!<%= config.dist %>/scripts/certData.js'
           ]
         }
       }
