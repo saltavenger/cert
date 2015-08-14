@@ -5,6 +5,7 @@
     "jquery": "~1.11.1",
     "modernizr": "~2.8.2",
     "fontawesome": "https://github.com/FortAwesome/Font-Awesome.git#~4.3.0",
-    "leaflet.zoomhome": "~0.1.0"
+    "leaflet.zoomhome": "~0.1.0",
+    "respond": "latest"
   }
 }
