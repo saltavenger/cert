@@ -19,6 +19,10 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css" />
     <!-- endbuild -->
+    <!--[if (gte IE 6)&(lte IE 8)]>
+      <script type="text/javascript" src="scripts/selectivizr-min.js"></script>
+      <noscript><link rel="stylesheet" href="styles/main.css" /></noscript>
+    <![endif]-->
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -29,10 +33,10 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <header class="group">
+    <header>
       <a href="#content" class="visuallyHidden" id="navSkip">Skip Comment Count Navigation</a>
       <h1>CommentCounts</h1>
-      <nav id="headerNav" role="navigation">
+      <nav id="headerNav" role="navigation" class="group">
         <div id="mainNav">
           <ul id="mainMenu">
             <li><a href="#">Home</a></li>
@@ -180,7 +184,7 @@
                     <li><a href="#">Download Comment Reports</a></li>
                   </ul>
                 </li>
-                <li class="dropdown" aria-expanded="false"><a href="#">Respond</a>
+                <li class="dropdown endPrimary" aria-expanded="false"><a href="#">Respond</a>
                   <ul class="submenu-2">
                     <li class="prevLevel"><a href="javascript:void(0);" aria-role="button" aria-pressed="false">Back</a></li>
                     <li><a href="#">Add New</a></li>
@@ -190,7 +194,7 @@
                     <li><a href="#">Download Response Reports</a></li>
                   </ul>
                 </li>
-                <li class="mobileSecondary"><a href="#">Contacts</a></li>
+                <li class="beginSecondary"><a href="#">Contacts</a></li>
                 <li><a href="#">Change Password</a></li>
                 <li><a href="#">Log Out</a></li>
               </ul>
@@ -201,13 +205,14 @@
       <div id="skipped-nav"></div>
     </header>
     <div id="content" role="main">
-      <div id="dash" class="group">
+      <p>This is a fake paragraph</p>
+      <!--<div id="dash" class="group">
         <div id="dash1" class="dashItem"></div>
         <div id="dash2" class="dashItem"></div>
         <div id="dash3" class="dashItem"></div>
         <div id="dash4" class="dashItem"></div>
         <div id="dash5" class="dashBottom"><div id="map"></div></div>
-      </div>
+      </div>-->
     </div>
     <footer role="contentinfo" class="group">
       <div id="logoContainer">
@@ -229,9 +234,11 @@
       </div>
     </footer>
 
-
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <!--[if lt IE 9]>
+      <script src="bower_components/respond/dest/respond.min.js"></script>
+    <![endif]-->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/leaflet/dist/leaflet.js"></script>
     <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
@@ -241,7 +248,8 @@
     <!-- endbuild -->
 
     <script src="//da7xgjtj801h2.cloudfront.net/2015.2.624/js/kendo.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>-->
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -256,6 +264,9 @@
     <!-- endbuild -->
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+    <!-- build:js({app,.tmp}) scripts/dash.js -->
+    <!-- <script src="scripts/dash.js"></script>-->
     <!-- endbuild -->
 </body>
 </html>

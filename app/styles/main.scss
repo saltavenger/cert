@@ -11,20 +11,19 @@ $blue: #48A9C5;
 
 @font-face{
   font-family: 'Gotham';
-  src: url('fonts/Gotham-Book.otf');
+  src: url('fonts/Gotham-Book.woff') format('woff');
 }
 
 @mixin gradient($color1, $color2){
-  background: $color1; /* Old browsers */
+  background-color: $color1; /* Old browsers */
   background: -moz-linear-gradient(top,  $color1 0%, $color2 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color1), color-stop(100%,$color2)); /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(top,  $color1 0%,$color2 100%); /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top,  $color1 0%,$color2 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top,  $color1 0%,$color2 100%); /* IE10+ */
   background: linear-gradient(to bottom,  $color1 0%,$color2 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color1', endColorstr='$color2',GradientType=0 ); /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#{$color1}", endColorstr="#{$color2}",GradientType=0 ); /* IE6-9 */
 }
-
 
 .visuallyHidden {
   height: 1px;
@@ -48,6 +47,7 @@ $blue: #48A9C5;
   pointer-events: auto;
   white-space: nowrap;
   visibility: visible;
+  z-index: 999;
 }
 
 .fleft{
@@ -71,6 +71,18 @@ body, html {
   color: #333;
   margin: 0px;
   padding: 0px;
+  min-height: 100vh;
+}
+
+body{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
 }
 
 ::selection {
@@ -108,7 +120,11 @@ a{
 }
 
 #content{
-  margin-left: 50px;
+  margin: 0px 50px 0px 50px;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  -moz-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 /* Navigation */
@@ -117,6 +133,8 @@ header{
   font-family: 'Gotham';
   @include gradient($red, #B81104);
   height: 100px;
+  overflow: visible;
+  z-index: 999;
 }
 
 nav#headerNav{
@@ -128,7 +146,6 @@ nav#headerNav{
     font-size: 14pt;
   }
   #mainMenu, #secondaryMenu, #mobileMenu{
-    position: relative;
     margin: 65px 0px 0px 0px;
     > li{
       display: inline-block;
@@ -150,7 +167,6 @@ nav#headerNav{
       }
       &.dropdown{
         ul.submenu-1, ul.submenu-2, ul.submenu-3{
-          z-index: 999;
           a{
             font-size: 10pt;
             color: #000;
@@ -185,7 +201,6 @@ nav#headerNav{
       li.dropdown{
         ul.submenu-2{
           @extend .visuallyHidden;
-          position: absolute;
         }
       }
       &:before{
@@ -196,7 +211,6 @@ nav#headerNav{
         content: "";
         left: 10%;
         position: absolute;
-        z-index: 99;
       }
     }
   }
@@ -319,7 +333,7 @@ nav#headerNav{
             margin-right: 10px;
           }
         }
-        .mobileSecondary{
+        .beginSecondary{
           border-top: 1px solid #888;
         }
       }
@@ -334,7 +348,7 @@ nav#headerNav{
         }
       }
       .submenu-1{
-        li:nth-child(5){
+        & > li.endPrimary{
           padding-bottom: 3px;
         }
         li.dropdown > a:after, .submenu-2 li.dropdown > a:after{
@@ -449,6 +463,25 @@ footer{
     }
   }
 }
+
+/* IE is terrible */
+.k-ie10, .k-ie10 > body{
+    height: 100%;
+}
+
+.no-flexbox{ 
+  height: 100%;
+  & body{
+    height: 100%;
+    width: 100%;    
+    display: table;
+  }
+  & footer{
+    display: table-row;
+    height: 1px;
+  }
+}
+
 
 /* Media Queries */
 
