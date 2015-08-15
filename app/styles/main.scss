@@ -479,6 +479,7 @@ footer{
   & footer{
     display: table-row;
     height: 1px;
+    background-color: $grey; //display: table-row apparently messes with background gradients in <= ie9
   }
 }
 
