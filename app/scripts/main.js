@@ -86,7 +86,7 @@
       }
     });
 
-    $('ul > li > ul li > a, ul > li > ul li').click(function(e){
+    $('ul' + navName + ' > li > ul li > a, ul' + navName + ' > li > ul li').click(function(e){
       e.stopPropagation();
       var currMenu = $(this).closest('ul'),
         currLevel = currMenu.attr('class'),
@@ -146,7 +146,7 @@
       }
     });
 
-    $(this).find('ul li:last-child a').keydown(function(e){
+    $(this).find('ul' + navName + ' li:last-child a').keydown(function(e){
       if(e.keyCode === 9) {
         // If the user tabs out of the navigation hide all menus
         $(navName + ' .submenu-1, ' + navName + ' .submenu-2, ' + navName + ' .submenu-3').css('visibility', 'hidden');
@@ -168,6 +168,46 @@
   $('#mainMenu').setupNavigation();
   $('#secondaryMenu').setupNavigation();
   $('#mobileMenu').setupMobileNavigation('#mobileMenu');
+  $('.simpleKendo').each(function(index, el){
+    buildGrid(el);
+  });
+  
+  function buildGrid(table){
+    var base = {
+      navigatable: true
+    },
+    pageable = {
+      pageable: {
+        pageSize: 20
+      }
+    },
+    dynamic = {
+      sortable: true,
+      filterable: true,
+    },
+    newOptions = {};
+    if($(table).data('pageable') === true){
+      if($(table).data('dynamic') === true){
+        $.extend(newOptions, pageable, dynamic);
+      }
+      else{
+        $.extend(newOptions, pageable);
+      }
+    }
+    else if($(table).data('dynamic') === true){
+      if($(table).data('pageable') === true){
+        $.extend(newOptions, dynamic, pageable);
+      }
+      else{
+        $.extend(newOptions, dynamic);
+      }
+    }
+    else{
+      newOptions = base;
+    }
+
+    var grid = $(table).kendoGrid(newOptions);
+    grid.data('kendoGrid').hideColumn('hiddenLink');
+  }
 
 })();
-
